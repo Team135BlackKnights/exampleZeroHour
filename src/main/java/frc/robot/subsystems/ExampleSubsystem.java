@@ -5,6 +5,7 @@
 package frc.robot.subsystems; //we are LOCATED UNDER the robot folder, and the subsys.
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -22,7 +23,7 @@ public class ExampleSubsystem extends SubsystemBase { //create a subsystem
   public CANSparkMax frontRight = new CANSparkMax(Constants.DriveConstants.FR_ID,MotorType.kBrushless);
   public CANSparkMax backLeft = new CANSparkMax(Constants.DriveConstants.BL_ID,MotorType.kBrushless);
   public CANSparkMax backRight = new CANSparkMax(Constants.DriveConstants.BL_ID,MotorType.kBrushless); 
-  MotorControllerGroup MCGleft = new MotorControllerGroup(frontLeft,backLeft);
+  MotorControllerGroup MCGleft = new MotorControllerGroup (frontLeft,backLeft);
   MotorControllerGroup MCGright = new MotorControllerGroup(frontRight,backRight);
   public DifferentialDrive tank = new DifferentialDrive(MCGleft, MCGright);
   public static RelativeEncoder eLFront, eRFront, eLBack, eRBack;
@@ -50,6 +51,13 @@ public class ExampleSubsystem extends SubsystemBase { //create a subsystem
   public double getDrivePos() {
     double avgEnc = (eLFront.getPosition() + eRFront.getPosition())/2;
     return avgEnc;
+  }
+
+  public void motorBrake() {
+    frontLeft.setIdleMode(IdleMode.kBrake);
+    frontRight.setIdleMode(IdleMode.kBrake);
+    backLeft.setIdleMode(IdleMode.kBrake);
+    backRight.setIdleMode(IdleMode.kBrake);
   }
 
   public void resetEncoders() {

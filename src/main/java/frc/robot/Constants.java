@@ -31,4 +31,13 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0; //what 'port' is the xbox controller on? found in DRIVER STATION
   }
+  public static class IntakeConstants{
+    public static final int 
+    Lift_ID = 21;
+  }
+  public static class Solonoid{
+    public static final int 
+    LSol_ID = 31,
+    RSol_ID = 32;
+  }
 }

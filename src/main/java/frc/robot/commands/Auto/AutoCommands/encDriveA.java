@@ -1,10 +1,12 @@
 package frc.robot.commands.Auto.AutoCommands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ExampleSubsystem;
 
 public class encDriveA extends CommandBase {
     private final ExampleSubsystem driveS;
+    PIDController drivePID = new PIDController(0.01, 0, 0);
     double Desired;
     boolean isFinished = false;
     
@@ -22,11 +24,9 @@ public class encDriveA extends CommandBase {
 
     @Override
     public void execute() {
-        if (driveS.getDrivePos() < Desired && Desired > 0) {
-            driveS.tankDrive(0.5, 0.5);
-        } else if (driveS.getDrivePos() > Desired && Desired < 0) {
-            driveS.tankDrive(-0.5, -0.5);
-        } else {
+        double autoDriveSpeed = drivePID.calculate(driveS.getDrivePos(), Desired);
+        driveS.tankDrive(autoDriveSpeed, autoDriveSpeed);
+        if (Math.abs(drivePID.getPositionError()) < 0.1 ) {
             isFinished = true;
         }
     }
@@ -34,6 +34,7 @@ public class encDriveA extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         driveS.tankDrive(0, 0);
+        driveS.motorBrake();
     }
 
     @Override
