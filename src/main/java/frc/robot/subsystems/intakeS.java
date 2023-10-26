@@ -19,8 +19,9 @@ public class intakeS extends SubsystemBase { //create a subsystem
 
     public CANSparkMax liftMotor = new CANSparkMax(Constants.IntakeConstants.Lift_ID,MotorType.kBrushless);
     public RelativeEncoder liftEncoder = liftMotor.getEncoder();
-    public  Solenoid SolenoidLeft = new Solenoid(PneumaticsModuleType.REVPH, Constants.Solonoid.LSol_ID);
-    public static  Solenoid SolenoidRight = new Solenoid(PneumaticsModuleType.REVPH, Constants.Solonoid.RSol_ID);
+
+    public Solenoid solenoidLeft = new Solenoid(PneumaticsModuleType.REVPH, Constants.Solonoid.LSol_ID);
+    public Solenoid solenoidRight = new Solenoid(PneumaticsModuleType.REVPH, Constants.Solonoid.RSol_ID);
 
     public intakeS(){
       liftMotor.enableVoltageCompensation(12);

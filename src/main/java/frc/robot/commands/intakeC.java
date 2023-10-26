@@ -45,6 +45,19 @@ public class intakeC extends CommandBase {
 
 */
 
+
+    if(RobotContainer.m_driverController.getAButtonPressed()== true) {
+        intakeS.solenoidLeft.set(true);
+    } else if(RobotContainer.m_driverController.getAButtonReleased()== true) {
+        intakeS.solenoidLeft.set(false);
+    }
+
+    if(RobotContainer.m_driverController.getBButtonPressed()== true) {
+        intakeS.solenoidRight.set(true);
+    } else if(RobotContainer.m_driverController.getBButtonReleased()== true) {
+        intakeS.solenoidRight.set(false);
+    }
+
     if(RobotContainer.m_driverController.getRightBumper() == true) {// when r1 is pressed it lifts the intake
         intakeS.liftMotor.set(0.25);
     } else if (RobotContainer.m_driverController.getLeftBumper() == true) {// when l1 is pressed it lowers the intake
